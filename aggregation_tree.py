@@ -65,6 +65,12 @@ class SumCombiner(Combiner):
     def __call__(self, target):
         return self._fold_children(target, 0, lambda a, b: a + b)
 
+class MeanCombiner(Combiner):
+    def __call__(self, target):
+        total = self._fold_children(target, 0, lambda a, b: a + b)
+        total.result /= len(self._children)
+        return total
+
 class Mutator(ANode):
     def __init__(self, child, name=None):
         super(Mutator, self).__init__(name)

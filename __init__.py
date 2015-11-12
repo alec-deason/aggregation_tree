@@ -1,1 +1,1 @@
-from .aggregation_tree import A, Threshold
+from .aggregation_tree import A, Threshold, MeanCombiner

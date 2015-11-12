@@ -1,6 +1,6 @@
 import unittest
 
-from aggregation_tree import A, Threshold
+from aggregation_tree import A, Threshold, MeanCombiner
 
 class TestAs(unittest.TestCase):
     def setUp(self):
@@ -45,6 +45,13 @@ class TestAs(unittest.TestCase):
         a = one + one + one
         result = a('test')
         self.assertEquals(result.result, 3)
+
+    def test_mean(self):
+        one = A(lambda x: 1)
+        two = A(lambda x: 2)
+        a = MeanCombiner([one, two])
+        result = a('test')
+        self.assertEquals(result.result, 1.5)
 
     def test_threshold(self):
         e_counter = A(lambda x: len([c for c in x if c == 'e']))
